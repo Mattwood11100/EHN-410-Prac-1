@@ -68,6 +68,7 @@ def Transpose_Encrypt(key, stage, plaintext):
     kIndex = []
     for i in range(kLen):
         kIndex.append(kList.index(kListSorted[i]))
+        kList[kList.index(kListSorted[i])] = " "
     # Print statement used for testing purposes
     # print("Key index:\n", kIndex, end="\n")
     # ===================================================
@@ -158,6 +159,7 @@ def Transpose_Decrypt(key, stage, ciphertext):
     kIndex = []
     for i in range(kLen):
         kIndex.append(kList.index(kListSorted[i]))
+        kList[kList.index(kListSorted[i])] = " "
     # Print statement used for testing purposes
     # print("Key index:\n", kIndex, end="\n")
     # ===================================================
@@ -216,11 +218,11 @@ def Transpose_Decrypt(key, stage, ciphertext):
 def Testing_Transposition_Cipher():
     # Encryption
     # ===================================================
-    # keys = "Mat"
+    # keys = "mississippi"
     # stages = 1
     # text = "Hey look! There is a dog!"
-    # encrypt = "EOTRSOHLKEIDYOHEAG"
-    # onlineText = "EOTRSOHLKEIDYOHEAG"
+    # encrypt = "EIODTXRXHEHXEXYSLAOOKG"
+    # onlineText = "EIODTXRXHEHXEXYSLAOOKG"
     # eText = Transpose_Encrypt(keys, stages, text)
     # print(encrypt == eText)
     # print(onlineText == eText, end="\n\n")
@@ -256,9 +258,9 @@ def Testing_Transposition_Cipher():
     # keys = "Mat"
     # stages = 1
     # text = "EOTRSOHLKEIDYOHEAG"
-    # decrypt = "HEYLOOKTHEREISADOG"
-    # onlineText = "HEYLOOKTHEREISADOG"
-    # dText = Transpose_Decrypt(keys, stages, text)
+    # decrypt = "HEYLOOKTHEREISADOGXXXX"
+    # onlineText = "HEYLOOKTHEREISADOGXXXX"
+    # dText = Transpose_Decrypt(keys, stages, eText)
     # print(decrypt == dText)
     # print(onlineText == dText, end="\n\n")
 
@@ -288,24 +290,25 @@ def Testing_Transposition_Cipher():
     # print(onlineText == dText, end="\n\n")
     # ===================================================
 
-    keys = "Jawbox"
-    stages = 6
-    text = "Look at that my cypher is working correctly"
-    eText = Transpose_Encrypt(keys, stages, text)
-    online = "OGCINREPHCYRRWOISKAOKLOTMATTHYLCTREY"
-
-    dText = Transpose_Decrypt(keys, stages, eText)
-    online2 = "LOOKATTHATMYCYPHERISWORKINGCORRECTLY"
-
-    if (eText == online):
-        print("Encryption Successful!!\n", eText, "\n", online, "\n\n")
-    else:
-        print("Encryption Unsuccessful!!\n")
-
-    if (dText == online2):
-        print("Decryption Successful!!\n", dText, "\n", online2, "\n\n")
-    else:
-        print("Decryption Unsuccessful!!\n")
+    # keys = "Jawbox"
+    # stages = 6
+    # text = "Look at that my cypher is working correctly"
+    # eText = Transpose_Encrypt(keys, stages, text)
+    # online = "OGCINREPHCYRRWOISKAOKLOTMATTHYLCTREY"
+    #
+    # dText = Transpose_Decrypt(keys, stages, eText)
+    # online2 = "LOOKATTHATMYCYPHERISWORKINGCORRECTLY"
+    #
+    # if (eText == online):
+    #     print("Encryption Successful!!\n", eText, "\n", online, "\n\n")
+    # else:
+    #     print("Encryption Unsuccessful!!\n")
+    #
+    # if (dText == online2):
+    #     print("Decryption Successful!!\n", dText, "\n", online2, "\n\n")
+    # else:
+    #     print("Decryption Unsuccessful!!\n")
+    pass
 
 
 Testing_Transposition_Cipher()
