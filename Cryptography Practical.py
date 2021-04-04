@@ -8,9 +8,9 @@ def Transpose_Encrypt(key, stage, plaintext):
     # Removing non alphabetic characters
     # ===================================================
     # Removes special characters and converts the plaintext to upper case
-    plaintext = ''.join(char for char in plaintext.upper() if 'A' <= char <= 'Z')
+    plaintext = ''.join(char for char in plaintext.lower() if 'a' <= char <= 'z')
     # Print statement used for testing purposes
-    # print("Plaintext, without special characters:\n", plaintext, end="\n")
+    print("Plaintext, without special characters:\n", plaintext, end="\n\n")
     # ===================================================
 
     # Getting the lengths of the key and message
@@ -19,14 +19,14 @@ def Transpose_Encrypt(key, stage, plaintext):
     # columns there needs to be
     kLen = len(key)
     # Print statement used for testing purposes
-    # print("Key length:\n", kLen, end="\n")
+    print("Key length:\n", kLen, end="\n\n")
 
     # The length of the plain text is need to determine if
     # padding needs to occur or not. This will also determine
     # the number of rows in the array
     sLen = len(plaintext)
     # Print statement used for testing purposes
-    # print("Plaintext length:\n", sLen, end="\n")
+    print("Plaintext length:\n", sLen, end="\n\n")
     # ===================================================
 
     # Calculating and adding, if necessary, the padding
@@ -39,38 +39,39 @@ def Transpose_Encrypt(key, stage, plaintext):
     if (sLen % kLen > 0):
         padLen = kLen - (sLen % kLen)
     # Print statement used for testing purposes
-    # print("Padding length:\n", padLen, end="\n")
+    print("Padding length:\n", padLen, end="\n\n")
     # Checks if the pad amount is 0 or not, if it is not 0 then padding
     # will be added
     if (padLen > 0):
         # Adding the padding, the letter 'X' is used to pad the text
-        plaintext = plaintext.ljust(sLen + padLen, 'X')
+        plaintext = plaintext.ljust(sLen + padLen, 'x')
+        print("Plaintext with padding:\n", plaintext, end="\n\n")
 
         # Getting the new length of the plaintext since padding was added
         sLen = len(plaintext)
         # Print statement used for testing purposes
-        # print("New Plaintext length:\n", sLen, end="\n")
+        print("New Plaintext length:\n", sLen, end="\n\n")
     # ===================================================
 
     # Getting the order in which the columns will be read
     # ===================================================
     # Splitting the key string into a list
-    kList = [char for char in key.upper()]
+    kList = [char for char in key.lower()]
     # Print statement used for testing purposes
-    # print("Key in list format:\n", kList, end="\n")
+    print("Key in list format:\n", kList, end="\n\n")
     # Creating a copy of the key string in list from so it can be
     # sorted alphabetically
-    kListSorted = [char for char in key.upper()]
+    kListSorted = [char for char in key.lower()]
     kListSorted.sort()
     # Print statement used for testing purposes
-    # print("Sorted Key list:\n", kListSorted, end="\n")
+    print("Sorted Key list:\n", kListSorted, end="\n\n")
     # Creating a column index list
     kIndex = []
     for i in range(kLen):
         kIndex.append(kList.index(kListSorted[i]))
         kList[kList.index(kListSorted[i])] = " "
     # Print statement used for testing purposes
-    # print("Key index:\n", kIndex, end="\n")
+    print("Key index:\n", kIndex, end="\n\n")
     # ===================================================
 
     # For loop to do the encryption multiple times if the stage is
@@ -90,7 +91,7 @@ def Transpose_Encrypt(key, stage, plaintext):
         nCol = kLen
         nRow = sLen // kLen
         # Print statement used for testing purposes
-        # print("Column and Row lengths:\n", nCol, "\t", nRow, end="\n")
+        print("Column and Row lengths:\n", nCol, "\t", nRow, end="\n\n")
         # Creating the transposition matrix with shape (nRow, nCol)
         trans = np.full((nRow, nCol), '')
 
@@ -101,7 +102,7 @@ def Transpose_Encrypt(key, stage, plaintext):
                 trans[i][j] = sText[tCounter]
                 tCounter += 1
         # Print statement used for testing purposes
-        # print("Transposition Matrix:\n", trans, end="\n")
+        print("Transposition Matrix:\n", trans, end="\n\n")
         # ===================================================
 
         # Encrypting the plaintext string
@@ -113,7 +114,7 @@ def Transpose_Encrypt(key, stage, plaintext):
             for j in range(nRow):
                 encryptText += trans[j][kIndex[i]]
         # Print statement used for testing purposes
-        # print("Encrypted text:\n", encryptText, end="\n\n")
+        print("Encrypted text:\n", encryptText, end="\n\n")
         # ===================================================
 
         if (stage > 1):
@@ -127,41 +128,41 @@ def Transpose_Encrypt(key, stage, plaintext):
 # Method used to decrypt a cipher text message given a specific key.
 # The stage will determine the number of time the transposition cipher
 # needs to be completed on the cipher text
-def Transpose_Decrypt(key, stage, ciphertext):
+def Transpose_Decrypt(key, stage, cyphertext):
     # Getting the lengths of the key and message
     # ===================================================
     # The length of the key is needed to determine how many
     # columns there needs to be
     kLen = len(key)
     # Print statement used for testing purposes
-    # print("Key length:\n", kLen, end="\n")
+    print("Key length:\n", kLen, end="\n\n")
 
     # The length of the cipher text will determine
     # the number of rows in the array
-    sLen = len(ciphertext)
+    sLen = len(cyphertext)
     # Print statement used for testing purposes
-    # print("Plaintext length:\n", sLen, end="\n")
+    print("Cyphertext length:\n", sLen, end="\n\n")
     # ===================================================
 
     # Getting the order in which the columns will be read
     # ===================================================
     # Splitting the key string into a list
-    kList = [char for char in key.upper()]
+    kList = [char for char in key.lower()]
     # Print statement used for testing purposes
-    # print("Key in list format:\n", kList, end="\n")
+    print("Key in list format:\n", kList, end="\n\n")
     # Creating a copy of the key string in list from so it can be
     # sorted alphabetically
-    kListSorted = [char for char in key.upper()]
+    kListSorted = [char for char in key.lower()]
     kListSorted.sort()
     # Print statement used for testing purposes
-    # print("Sorted Key list:\n", kListSorted, end="\n")
+    print("Sorted Key list:\n", kListSorted, end="\n\n")
     # Creating a column index list
     kIndex = []
     for i in range(kLen):
         kIndex.append(kList.index(kListSorted[i]))
         kList[kList.index(kListSorted[i])] = " "
     # Print statement used for testing purposes
-    # print("Key index:\n", kIndex, end="\n")
+    print("Key index:\n", kIndex, end="\n\n")
     # ===================================================
 
     # For loop to do the decryption multiple times if the stage is
@@ -173,7 +174,7 @@ def Transpose_Decrypt(key, stage, ciphertext):
         # Variable for storing the decrypted text if stage is
         # greater than 1
         if (sNum < 1):
-            sText = ciphertext
+            sText = cyphertext
 
         # Creating and populating the transposition matrix
         # ===================================================
@@ -181,7 +182,7 @@ def Transpose_Decrypt(key, stage, ciphertext):
         nCol = kLen
         nRow = sLen // kLen
         # Print statement used for testing purposes
-        # print("Column and Row lengths:\n", nCol, "\t", nRow, end="\n")
+        print("Column and Row lengths:\n", nCol, "\t", nRow, end="\n\n")
         # Creating the transposition matrix with shape (nRow, nCol)
         trans = np.full((nRow, nCol), '')
 
@@ -193,10 +194,10 @@ def Transpose_Decrypt(key, stage, ciphertext):
                 trans[j][kIndex[i]] = sText[tCounter]
                 tCounter += 1
         # Print statement used for testing purposes
-        # print("Transposition Matrix:\n", trans, end="\n")
+        print("Transposition Matrix:\n", trans, end="\n\n")
         # ===================================================
 
-        # Decrypting the ciphertext string
+        # Decrypting the cyphertext string
         # ===================================================
         # Looping through the transposition matrix and reading the rows
         decryptText = ""
@@ -204,7 +205,7 @@ def Transpose_Decrypt(key, stage, ciphertext):
             for j in range(nCol):
                 decryptText += trans[i][j]
         # Print statement used for testing purposes
-        # print("Decrypted text:\n", decryptText, end="\n\n")
+        print("Decrypted text:\n", decryptText, end="\n\n")
         # ===================================================
 
         if (stage > 1):
@@ -218,12 +219,21 @@ def Transpose_Decrypt(key, stage, ciphertext):
 def Testing_Transposition_Cipher():
     # Encryption
     # ===================================================
-    # keys = "mississippi"
-    # stages = 1
-    # text = "Hey look! There is a dog!"
+    keys = "mississippi"
+    stages = 1
+    text = "Hey look! There is a dog!"
     # encrypt = "EIODTXRXHEHXEXYSLAOOKG"
     # onlineText = "EIODTXRXHEHXEXYSLAOOKG"
-    # eText = Transpose_Encrypt(keys, stages, text)
+    print()
+    print("Key:\n", keys, end="\n\n")
+    print("Stage:\n", stages, end="\n\n")
+    print("Plaintext:\n", text, end="\n\n")
+    eText = Transpose_Encrypt(keys, stages, text)
+    print()
+    print("Key:\n", keys, end="\n\n")
+    print("Stage:\n", stages, end="\n\n")
+    print("Cyphertext:\n", eText, end="\n\n")
+    dText = Transpose_Decrypt(keys, stages, eText)
     # print(encrypt == eText)
     # print(onlineText == eText, end="\n\n")
 
